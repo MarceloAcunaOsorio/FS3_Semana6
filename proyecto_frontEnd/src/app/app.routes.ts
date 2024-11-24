@@ -32,14 +32,19 @@ export const routes: Routes = [
   {
    path:'Registrar',
    loadComponent:()=> import('./Pages/registrar/registrar.component'),
+   canActivate:[authenticatedGuard]
   },
   {
    path:'home',
    loadComponent:()=> import('./Pages/home/home.component')
   },
   {
+   path:'crea-producto',
+   loadComponent:()=> import('./Pages/crea-producto/crea-producto.component')
+   },
+  {
    path:'**',
    redirectTo:'home'
   }
-
+ 
 ];

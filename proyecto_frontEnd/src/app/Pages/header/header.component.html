@@ -5,7 +5,7 @@
             <input type='checkbox' id='check' />
             <span class="menu">
                 <li><a routerLink="/home">Home</a></li>
-                <li><a href="">Productos</a></li>
+                <li><a routerLink="/crea-producto">Productos</a></li>
                 <li><a routerLink="/Registrar">Registrarse</a></li>
                 <li><a *ngIf="!userLoginOn" routerLink="/login">Login</a></li>
                 <li><a  (click)="logout()" class="">Cerrar Sesion</a></li>

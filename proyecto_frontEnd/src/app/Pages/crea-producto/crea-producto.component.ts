@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-crea-producto',
   standalone: true,
-  imports: [RouterOutlet,ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterModule,FormsModule],
   templateUrl: './crea-producto.component.html',
   styleUrl: './crea-producto.component.css'
 })
-export class CreaProductoComponent {
+export default class CreaProductoComponent {
 
   //formgroup para formulario
   productoForm: FormGroup;
@@ -25,13 +25,13 @@ export class CreaProductoComponent {
 
   constructor(){
 
-    // inicializamos los campos del formulario
-    this.color = new FormControl('');
-    this.marca = new FormControl('');
-    this.modelo = new FormControl('');
-    this.nombre = new FormControl('');
-    this.descripcion = new FormControl('');
-    this.talla = new FormControl(0);
+    // inicializamos los campos del formulario y le asignamos las validaciones correspondiente
+    this.color = new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
+    this.marca = new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
+    this.modelo = new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
+    this.nombre = new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
+    this.descripcion = new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(200)]);
+    this.talla = new FormControl(0,[Validators.required,Validators.min(1), Validators.max(70)]);
 
     //inicializamos el formulario
     this.productoForm = new FormGroup({
@@ -44,5 +44,10 @@ export class CreaProductoComponent {
     });
   }
 
+  //metodo
+  handleSubmit():void{
+    console.log(this.productoForm);
+    this.productoForm.reset();
+  }
 
 }
