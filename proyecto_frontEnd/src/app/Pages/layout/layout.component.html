@@ -11,6 +11,7 @@
         <div class="contenedor2">
             <button class="btn primary">crear Producto</button>
         </div>
+       
         <div class="table-container">
             <table class="table-rwd">
               <tr>
@@ -22,53 +23,20 @@
                 <th>Talla</th>
                 <th>Descripcion</th>
               </tr>
+              @for (prod of producto; track prod._IdProducto) {
               <tr>
-                <td>Producto 1</td>
-                <td>100</td>
-                <td>200</td>
-                <td>300</td>
-                <td>400</td>
-                <td>500</td>
-                <td>600</td>
+                <td>{{prod._IdProducto}}</td>
+                <td>{{prod._NombreProducto}}</td>
+                <td>{{prod._MarcaProducto}}</td>
+                <td>{{prod._ModeloProducto}}</td>
+                <td>{{prod._ColorProducto}}</td>
+                <td>{{prod._TallaProducto}}</td>
+                <td>{{prod._DescripcionProducto}}</td>
               </tr>
-              <tr>
-                <td>Producto 2</td>
-                <td>200</td>
-                <td>400</td>
-                <td>600</td>
-                <td>800</td>
-                <td>1000</td>
-                <td>1200</td>
-              </tr>
-              <tr>
-                <td>Producto 3</td>
-                <td>300</td>
-                <td>600</td>
-                <td>900</td>
-                <td>1200</td>
-                <td>1500</td>
-                <td>1800</td>
-              </tr>
-              <tr>
-                <td>Producto 4</td>
-                <td>400</td>
-                <td>800</td>
-                <td>1200</td>
-                <td>1600</td>
-                <td>2000</td>
-                <td>2400</td>
-              </tr>
-              <tr>
-                <td>Producto 5</td>
-                <td>500</td>
-                <td>1000</td>
-                <td>1500</td>
-                <td>2000</td>
-                <td>2500</td>
-                <td>3000</td>
-              </tr>
+            }@empty {<p>No existen Productos</p>}
             </table>
           </div>
+       
     </div>
     <!---footer-->
     <div>

@@ -16,4 +16,7 @@ export default class RegistrarComponent {
   password: string='';
   username: string='';
 
+
+
+
 }
