@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 
@@ -17,6 +17,7 @@ export default class RegistrarComponent {
   username: string='';
 
 
+  constructor(private fb: FormBuilder){}
 
 
 }
