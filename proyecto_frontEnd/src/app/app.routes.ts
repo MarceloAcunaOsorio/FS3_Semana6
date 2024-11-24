@@ -40,7 +40,7 @@ export const routes: Routes = [
   },
   {
    path:'crea-producto',
-   loadComponent:()=> import('./Pages/crea-producto/crea-producto.component')
+   loadComponent:()=> import('./Pages/modal/modal.component')
    },
   {
    path:'**',

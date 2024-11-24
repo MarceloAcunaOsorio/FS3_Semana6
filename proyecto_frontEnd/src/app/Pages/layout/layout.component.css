@@ -73,20 +73,8 @@ h1 {
   color: #1A8CFF;
 }
 
-.table-rwd td:after {
-  content: "";
-}
-
 .table-rwd td:first-of-type {
   text-align: center;
-}
-
-.table-rwd td:first-of-type:before {
-  content: "";
-}
-
-.table-rwd td:first-of-type:after {
-  content: "";
 }
 
 .table-rwd tr:hover {
@@ -98,7 +86,7 @@ h1 {
 }
 
 .table-container {
-  overflow-x: auto;
+  overflow-x: 100%;
 }
 
 .table-rwd {
@@ -128,3 +116,8 @@ h1 {
   width: 100%;
   height: 40px;
 }
+
+
+/*modal decreacion de productos*/
+
+
