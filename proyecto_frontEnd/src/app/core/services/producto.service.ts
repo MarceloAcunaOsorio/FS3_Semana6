@@ -23,14 +23,21 @@ export class ProductoService {
     return this.http.get<producto>('${this.apiUrl}/${idProducto}');
   }
 
+
   //crear producto
-  createProducto(producto:producto):Observable<producto>{
-    return this.http.post<producto>(this.apiUrl, producto)
+ private apUrl  = 'http://localhost:8085/admin/crearproducto'
+  createProducto(producto: producto, selectedFile: File): Observable<producto> {
+    const formData = new FormData()
+    formData.append('producto', new Blob([JSON.stringify(producto)], { type: 'application/json' }));
+
+    return this.http.post<producto>(this.apUrl, formData);
   }
+  
 
   //Actualizar producto
-  updateProducto(producto:producto){
-    return this.http.put(this.apiUrl, producto)
+  private apUrls ='http://localhost:8085/admin/actualizar'
+  updateProducto(producto: producto, selectedFile: File | null){
+    return this.http.put(this.apUrls, producto)
   }
 
   //eliminar producto

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { authenticatedGuard } from './core/guards/authenticated.guard';
 
-
 export const routes: Routes = [
 
   {
@@ -14,8 +13,8 @@ export const routes: Routes = [
          path:'dashboard',
          loadComponent:()=>import('./Pages/dashboard/dashboard.component'),
          canActivate:[AuthGuard],
-
       },
+      
       {
          path: '',
          redirectTo: 'dashboard',
@@ -38,10 +37,6 @@ export const routes: Routes = [
    path:'home',
    loadComponent:()=> import('./Pages/home/home.component')
   },
-  {
-   path:'crea-producto',
-   loadComponent:()=> import('./Pages/modal/modal.component')
-   },
   {
    path:'**',
    redirectTo:'home'

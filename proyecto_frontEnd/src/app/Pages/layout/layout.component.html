@@ -6,8 +6,9 @@
 <!--body-->
 <div class="contenedor">
   <div class="contenedor2">
-    <button class="btn primary" (click)="abrirModal()">crear Producto</button>
+    <app-modal></app-modal>
   </div>
+
 
   <div class="table-container">
     <table class="table-rwd">
@@ -19,6 +20,8 @@
         <th>Color</th>
         <th>Talla</th>
         <th>Descripcion</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
       </tr>
       @for (prod of producto; track prod._IdProducto) {
       <tr>
@@ -29,6 +32,8 @@
         <td>{{prod._ColorProducto}}</td>
         <td>{{prod._TallaProducto}}</td>
         <td>{{prod._DescripcionProducto}}</td>
+        <td><p-button label="Editar" class="w-full" styleClass="w-full"/></td>
+        <td><p-button label="eliminar" class="w-full" styleClass="w-full"/></td>
       </tr>
       }@empty {<p>No existen Productos</p>}
     </table>
