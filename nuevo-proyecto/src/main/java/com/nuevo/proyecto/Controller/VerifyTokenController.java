@@ -19,7 +19,6 @@ import com.nuevo.proyecto.Service.ProductoService;
 
 @RestController
 @RequestMapping("/admin")
-
 @CrossOrigin(origins="http://localhost:4200")
 public class VerifyTokenController {
     

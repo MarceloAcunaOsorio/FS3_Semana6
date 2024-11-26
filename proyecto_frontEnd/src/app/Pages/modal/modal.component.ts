@@ -1,6 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterModule,Router } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { ProductoService } from '../../core/services/producto.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,7 +14,14 @@ import { FileSelectEvent } from 'primeng/fileupload';
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [ReactiveFormsModule,FormsModule,ButtonModule,RouterModule,InputTextModule,InputNumberModule,CardModule,FileUploadModule],
+  imports: [ReactiveFormsModule, 
+            FormsModule, 
+            ButtonModule, 
+            RouterModule, 
+            InputTextModule, 
+            InputNumberModule, 
+            CardModule, 
+            FileUploadModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })
@@ -24,7 +31,7 @@ export default class ModalComponent {
   isSaveInProgress: boolean = false;
   edit: boolean = false;
   selectedFile: File | null = null;
- 
+
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +54,7 @@ export default class ModalComponent {
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('_IdProducto');
-    if (id !=='new') {
+    if (id !== 'new') {
       this.edit = true;
       this.getProductById(+id!);
     }
@@ -59,33 +66,32 @@ export default class ModalComponent {
 
   getProductById(_IdProducto: number) {
     this.productservice.getProductoById(_IdProducto).subscribe({
-      next: (foundProducto) => {this.productoForm.patchValue(foundProducto);},
+      next: (foundProducto) => { this.productoForm.patchValue(foundProducto); },
       error: () => {
-        this.messageService.add({severity: 'error',summary: 'Error',detail: 'No encontrado'});
-        this.router.navigateByUrl('/');},
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No encontrado' });
+        this.router.navigateByUrl('/');
+      },
     });
   }
 
   createProducto() {
     if (this.productoForm.invalid) {
-      this.messageService.add({severity: 'error',summary: 'Error',detail: 'Revise los campos e intente nuevamente'});
-      return;
-    }
-    if (!this.selectedFile) {
-      this.messageService.add({severity: 'error',summary: 'Error',detail: 'Seleccione una imagen e intente nuevamente'});
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Revise los campos e intente nuevamente', });
       return;
     }
     this.isSaveInProgress = true;
-    
-    this.productservice.createProducto(this.productoForm.value,this.selectedFile).subscribe({
-        next: () => {this.messageService.add({severity: 'success',summary: 'Guardado', detail: 'Producto guardado correctamente'});
-          this.isSaveInProgress = false;
-          this.router.navigateByUrl('/');
-        },
-        error: () => {this.isSaveInProgress = false;
-          this.messageService.add({severity: 'error',summary: 'Error',detail: 'Revise los campos e intente nuevamente'});
-        },
-      });
+
+    this.productservice.createProducto(this.productoForm.value).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Guardado', detail: 'Producto guardado correctamente' });
+        this.isSaveInProgress = false;
+        this.router.navigateByUrl('/');
+      },
+      error: () => {
+        this.isSaveInProgress = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Revise los campos e intente nuevamente' });
+      },
+    });
   }
 
   updateProducto() {
@@ -98,7 +104,8 @@ export default class ModalComponent {
       return;
     }
     this.isSaveInProgress = true;
-    this.productservice.updateProducto(this.productoForm.value,this.selectedFile).subscribe({
+
+    this.productservice.updateProducto(this.productoForm.value).subscribe({
       next: () => {
         this.messageService.add({
           severity: 'success',
@@ -118,5 +125,5 @@ export default class ModalComponent {
       },
     });
   }
-  
+
 }

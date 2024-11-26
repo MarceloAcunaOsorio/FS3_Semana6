@@ -19,24 +19,21 @@ export class ProductoService {
 
 
   //id del producto
-  getProductoById(idProducto:number): Observable<producto>{
-    return this.http.get<producto>('${this.apiUrl}/${idProducto}');
+  getProductoById(_idProducto:number): Observable<producto>{
+    return this.http.get<producto>('${this.apiUrl}/${_idProducto}');
   }
 
 
   //crear producto
  private apUrl  = 'http://localhost:8085/admin/crearproducto'
-  createProducto(producto: producto, selectedFile: File): Observable<producto> {
-    const formData = new FormData()
-    formData.append('producto', new Blob([JSON.stringify(producto)], { type: 'application/json' }));
-
-    return this.http.post<producto>(this.apUrl, formData);
+  createProducto(producto: producto): Observable<producto> {
+    return this.http.post<producto>(this.apUrl,producto)
   }
   
 
   //Actualizar producto
   private apUrls ='http://localhost:8085/admin/actualizar'
-  updateProducto(producto: producto, selectedFile: File | null){
+  updateProducto(producto: producto){
     return this.http.put(this.apUrls, producto)
   }
 
