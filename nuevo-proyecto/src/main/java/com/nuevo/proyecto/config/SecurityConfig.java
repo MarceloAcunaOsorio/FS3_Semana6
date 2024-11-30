@@ -20,12 +20,11 @@ import com.nuevo.proyecto.Service.imple.UserDetailsServiceImpl;
 import com.nuevo.proyecto.security.JwtAuthEntryPoint;
 import com.nuevo.proyecto.security.JwtAuthenticationFilter;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-     @Autowired
+    @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
     @Autowired
     private JwtAuthEntryPoint jwtAuthEntryPoint;
@@ -34,12 +33,12 @@ public class SecurityConfig {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsServiceImpl);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -47,8 +46,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
+                
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authorization -> authorization
@@ -60,15 +60,16 @@ public class SecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtAuthEntryPoint))
                 .headers(AbstractHttpConfigurer::disable)
                 .build();
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
 }

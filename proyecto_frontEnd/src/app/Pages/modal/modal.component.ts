@@ -1,33 +1,37 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterModule, Router } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router, RouterLink } from '@angular/router';
 import { ProductoService } from '../../core/services/producto.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
-import { FileUploadModule } from 'primeng/fileupload';
-import { FileSelectEvent } from 'primeng/fileupload';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from "../footer/footer.component";
+import { ToastModule } from "primeng/toast"
 
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, 
-            FormsModule, 
-            ButtonModule, 
-            RouterModule, 
-            InputTextModule, 
-            InputNumberModule, 
-            CardModule, 
-            FileUploadModule],
+  imports: [FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    CommonModule,
+    HeaderComponent,
+    ButtonModule,
+    FooterComponent,
+    ToastModule,
+    InputNumberModule,
+    InputTextModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css'
 })
 
 export default class ModalComponent {
-  productoForm!: FormGroup;
+  productoForm: FormGroup;
   isSaveInProgress: boolean = false;
   edit: boolean = false;
   selectedFile: File | null = null;
@@ -53,15 +57,11 @@ export default class ModalComponent {
   }
 
   ngOnInit(): void {
-    let id = this.activatedRoute.snapshot.paramMap.get('_IdProducto');
-    if (id !== 'new') {
+    let _IdProducto = this.activatedRoute.snapshot.paramMap.get('_IdProducto');
+    if (_IdProducto !== 'new') {
       this.edit = true;
-      this.getProductById(+id!);
+      this.getProductById(+_IdProducto!);
     }
-  }
-
-  onFileSelected(event: FileSelectEvent) {
-    this.selectedFile = event.files[0];
   }
 
   getProductById(_IdProducto: number) {

@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nuevo.proyecto.Model.Producto;
 import com.nuevo.proyecto.Service.ProductoService;
 
+
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin("http://localhost:4200/")
 public class VerifyTokenController {
     
-     @Autowired
+    @Autowired
     private ProductoService productoService;
 
     @RequestMapping("/token")
@@ -37,34 +38,38 @@ public class VerifyTokenController {
     }
 
     //Crear
-    @PostMapping("/admin/crearproducto")
+    @PostMapping("/crearproducto")
     public Producto createProductoAdmin(@RequestBody Producto producto){
       return productoService.createProducto(producto);
     }
 
     //Actualizar actualizar
-    @PutMapping("/admin/actualizar/{id}")
+    @PutMapping("/actualizar/{id}")
     public Producto updateProductoAdmin(@PathVariable Long id, @RequestBody Producto producto){
         return productoService.updateProducto(id, producto);
     }
 
     //Eliminar producto
-    @DeleteMapping("/admin/eliminar/{id}")
+
+    @DeleteMapping("/eliminar/{id}")
     public void deleteProductoAdmin(@PathVariable Long id){
         productoService.deleteProducto(id);
     }
 
     //Listar producto
-    @GetMapping("/admin/listado")
+
+    @GetMapping("/listado")
     public List<Producto>getAllProductoadmin(){
         return productoService.getAllProductos();
     }
 
     //buscar producto
-    @GetMapping("/admin/{id}")
+
+    @GetMapping("/{id}")
     public Optional<Producto>getProductoAdminById(@PathVariable Long id){
         return productoService.getProductoById(id);
     }
+
 
     @GetMapping("admin/home")
     public List<Producto>getAllProductosadmin(){

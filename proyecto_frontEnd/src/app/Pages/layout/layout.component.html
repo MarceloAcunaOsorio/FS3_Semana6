@@ -1,3 +1,4 @@
+<p-toast/>
 <!--header-->
 <div>
   <app-header></app-header>
@@ -6,9 +7,9 @@
 <!--body-->
 <div class="contenedor">
   <div class="contenedor2">
-    <app-modal></app-modal>
+    <a routerLink="modal/new" class="p-button font-bold w-max">Crear Producto</a>
   </div>
-
+ 
 
   <div class="table-container">
     <table class="table-rwd">
@@ -32,14 +33,15 @@
         <td>{{prod._ColorProducto}}</td>
         <td>{{prod._TallaProducto}}</td>
         <td>{{prod._DescripcionProducto}}</td>
-        <td><p-button label="Editar" class="w-full" styleClass="w-full"/></td>
-        <td><p-button label="eliminar" class="w-full" styleClass="w-full"/></td>
+        <td><a routerLink="modal/{{prod._IdProducto}}" class="p-button font-bold w-max" styleClass="w-full">Editar</a></td>
+        <td><a (onclick)="eliminarProducto(prod._IdProducto)" class="p-button font-bold w-max" styleClass="w-full">Eliminar</a></td>
       </tr>
       }@empty {<p>No existen Productos</p>}
     </table>
   </div>
-
 </div>
+
+
 <!---footer-->
 <div class="footer">
   <app-footer></app-footer>

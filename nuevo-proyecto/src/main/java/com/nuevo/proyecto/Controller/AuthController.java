@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +27,7 @@ import com.nuevo.proyecto.security.JwtGenerator;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("http://localhost:4200/")
 public class AuthController {
     
     @Autowired
@@ -49,6 +47,7 @@ public class AuthController {
     public ResponseEntity<JwtResponseDto> login(@RequestBody LoginDto loginDto) {
         return ResponseEntity.ok(userService.login(loginDto));
     }
+    
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
