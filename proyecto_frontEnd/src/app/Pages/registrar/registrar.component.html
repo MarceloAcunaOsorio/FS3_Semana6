@@ -1,23 +1,26 @@
+<p-toast/>
+
+
 <app-header></app-header>
 <div class="main">
 	<h1>TiendaOnline</h1>
 	<h3>Registrarse</h3>
 
-	<form action="">
+	<form  [formGroup]="userForm" (ngSubmit)="createUsuario()">
 		<label for="first">
 			email:
 		</label>
-		<input [(ngModel)]="email" type="text" id="first" name="email" placeholder="Enter your email" required>
+		<input pInputText formControlName="email" type="text" id="first" name="email" placeholder="Enter your email" required>
 
 		<label for="first">
 			UserName:
 		</label>
-		<input [(ngModel)]="username" type="text" id="first" name="username" placeholder="Enter your username" required>
+		<input pInputText formControlName="username" type="text" id="first" name="username" placeholder="Enter your username" required>
 
 		<label for="password">
 			Password:
 		</label>
-		<input [(ngModel)]="password" type="password" id="password" name="password" placeholder="Enter your Password"
+		<input pInputText formControlName="password" type="password" id="password" name="password" placeholder="Enter your Password"
 			required>
 
 		<div class="wrap">

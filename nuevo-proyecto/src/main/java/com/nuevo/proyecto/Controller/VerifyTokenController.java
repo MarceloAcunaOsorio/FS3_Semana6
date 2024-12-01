@@ -20,7 +20,7 @@ import com.nuevo.proyecto.Service.ProductoService;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("http://localhost:4200")
 public class VerifyTokenController {
     
     @Autowired

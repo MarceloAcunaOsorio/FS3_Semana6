@@ -5,7 +5,6 @@ import { ProductoService } from '../../core/services/producto.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../header/header.component";
@@ -31,7 +30,7 @@ import { ToastModule } from "primeng/toast"
 })
 
 export default class ModalComponent {
-  productoForm: FormGroup;
+  productoForm!: FormGroup;
   isSaveInProgress: boolean = false;
   edit: boolean = false;
   selectedFile: File | null = null;
@@ -66,7 +65,7 @@ export default class ModalComponent {
 
   getProductById(_IdProducto: number) {
     this.productservice.getProductoById(_IdProducto).subscribe({
-      next: (foundProducto) => { this.productoForm.patchValue(foundProducto); },
+      next: foundProducto => { this.productoForm.patchValue(foundProducto); },
       error: () => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No encontrado' });
         this.router.navigateByUrl('/');
@@ -96,32 +95,20 @@ export default class ModalComponent {
 
   updateProducto() {
     if (this.productoForm.invalid) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Revise los campos e intente nuevamente',
-      });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Revise los campos e intente nuevamente' });
       return;
     }
     this.isSaveInProgress = true;
 
     this.productservice.updateProducto(this.productoForm.value).subscribe({
       next: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Guardado',
-          detail: 'Libro actualizado correctamente',
-        });
+        this.messageService.add({ severity: 'success', summary: 'Guardado', detail: 'Libro actualizado correctamente' });
         this.isSaveInProgress = false;
         this.router.navigateByUrl('/');
       },
       error: () => {
         this.isSaveInProgress = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Revise los campos e intente nuevamente',
-        });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Revise los campos e intente nuevamente' });
       },
     });
   }
